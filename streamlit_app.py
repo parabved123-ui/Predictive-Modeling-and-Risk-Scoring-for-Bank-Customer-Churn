@@ -197,13 +197,10 @@ if page == "📊 Dashboard":
     
     with col2:
         fig_age = px.box(
-            # Ensure this 'if' is aligned perfectly with the code above it
-    if 0 in df['Exited'].values and 1 in df['Exited'].values:
-        # These lines below MUST be indented further to the right
-        fig_age = px.box(
-            df, x='Exited', y='Age', color='Exited',
-            color_discrete_map={0: '#2ecc71', 1: '#e74c3c'},
-            labels={'Exited': 'Customer Status', 'Age': 'Age (years)'}, points='outliers'
+            fig_age = px.box(
+    df, x='Exited', y='Age', color='Exited',
+    color_discrete_map={0: '#2ecc71', 1: '#e74c3c'},
+    labels={'Exited': 'Customer Status', 'Age': 'Age (years)'}, points='outliers'
         )
         st.plotly_chart(fig_age)
     else:
