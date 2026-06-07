@@ -197,9 +197,17 @@ if page == "📊 Dashboard":
     
     with col2:
         fig_age = px.box(
+                # Ensure both categories exist to prevent KeyError
+    if 0 in df['Exited'].values and 1 in df['Exited'].values:
+        fig_age = px.box(
             df, x='Exited', y='Age', color='Exited',
             color_discrete_map={0: '#2ecc71', 1: '#e74c3c'},
             labels={'Exited': 'Customer Status', 'Age': 'Age (years)'}, points='outliers'
+        )
+        st.plotly_chart(fig_age)
+    else:
+        st.info("The chart cannot be displayed because one of the categories (Exited or Active) is missing from the current filtered data.")
+
         )
         fig_age.update_layout(title="Age Distribution by Churn Status", showlegend=False, height=400,
                               xaxis_ticktext=['Retained', 'Churned'], xaxis_tickvals=[0, 1])
